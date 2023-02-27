@@ -1,21 +1,17 @@
 using System;
 using System.Collections.Generic;
-using Enums;
+using Tetris.Base;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Models
+namespace Tetris.Tetromino
 {
     [Serializable]
-    public class TetrominoData
+    public class TetrominoModel : BaseModel
     {
-        public Tetromino tetromino;
+        public TetrominoType tetrominoType;
         public Tile tile;
         public IEnumerable<Vector2Int> cells;
-
-        public void Initialize()
-        {
-            cells = Data.Cells[tetromino];
-        }
+        public Vector3Int position;
     }
 }

@@ -1,0 +1,16 @@
+#CONFIGURATORSCRIPT#
+using UnityEngine;
+using Configurator.Base;
+
+namespace #CONFIGURATORNAMESPACE#
+{
+    public class #SCRIPTNAME# : BaseComponent<#CONFIGURATORMODEL#, #CONFIGURATORMEDIATOR#>
+    {
+        public override void OnUpdate(#CONFIGURATORMODEL# model)
+        {
+            base.OnUpdate(model);
+        }
+
+        public override #CONFIGURATORMODEL# GetModel() => new #CONFIGURATORMODEL#();
+    }
+}

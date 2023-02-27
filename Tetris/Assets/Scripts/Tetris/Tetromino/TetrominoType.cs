@@ -1,6 +1,6 @@
-namespace Enums
+namespace Tetris.Tetromino
 {
-    public enum Tetromino
+    public enum TetrominoType
     {
         I,
         O,
@@ -9,5 +9,6 @@ namespace Enums
         L,
         S,
         Z,
+        Ghost,
     }
 }
