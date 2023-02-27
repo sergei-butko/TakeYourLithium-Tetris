@@ -60,5 +60,14 @@ namespace Tetris.Tetromino
                 _tilemap.SetTile(tilePosition, tile);
             }
         }
+
+        private void Move(Vector2Int translation)
+        {
+            var newPosition = _position + (Vector3Int) translation;
+        }
+
+        private void Rotate()
+        {
+        }
     }
 }
