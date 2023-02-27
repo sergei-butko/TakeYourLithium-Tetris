@@ -1,0 +1,13 @@
+#CONFIGURATORSCRIPT#
+using UnityEngine;
+using System;
+using Configurator.Base;
+
+namespace #CONFIGURATORNAMESPACE#
+{
+    [Serializable]
+    public class #SCRIPTNAME# : BaseModel
+    {
+        #NOTRIM#
+    }
+}

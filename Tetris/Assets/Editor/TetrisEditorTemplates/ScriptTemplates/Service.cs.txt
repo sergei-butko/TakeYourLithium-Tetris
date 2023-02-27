@@ -1,0 +1,11 @@
+#CONFIGURATORSCRIPT#
+using UnityEngine;
+using Configurator.Base;
+
+namespace #CONFIGURATORNAMESPACE#
+{
+    public class #SCRIPTNAME# : BaseService
+    {
+        #NOTRIM#
+    }
+}
