@@ -11,7 +11,7 @@ namespace Tetris.Utils
 
         public static readonly float[] RotationMatrix = {Cos, Sin, -Sin, Cos};
 
-        public static readonly Dictionary<TetrominoType, IEnumerable<Vector2Int>> Cells = new()
+        public static readonly Dictionary<TetrominoType, Vector2Int[]> Cells = new()
         {
             {TetrominoType.I, new Vector2Int[] {new(-1, 1), new(0, 1), new(1, 1), new(2, 1)}},
             {TetrominoType.J, new Vector2Int[] {new(-1, 1), new(-1, 0), new(0, 0), new(1, 0)}},
@@ -22,39 +22,30 @@ namespace Tetris.Utils
             {TetrominoType.Z, new Vector2Int[] {new(-1, 1), new(0, 1), new(0, 0), new(1, 0)}},
         };
 
-        public static readonly Dictionary<TetrominoType, Vector2Int[,]> WallKicks = new()
-        {
-            {TetrominoType.I, WallKicksI},
-            {TetrominoType.J, WallKicksJLOSTZ},
-            {TetrominoType.L, WallKicksJLOSTZ},
-            {TetrominoType.O, WallKicksJLOSTZ},
-            {TetrominoType.S, WallKicksJLOSTZ},
-            {TetrominoType.T, WallKicksJLOSTZ},
-            {TetrominoType.Z, WallKicksJLOSTZ},
-        };
-
         private static readonly Vector2Int[,] WallKicksI =
         {
             {new(0, 0), new(-2, 0), new(1, 0), new(-2, -1), new(1, 2)},
-            {new(0, 0), new(2, 0), new(-1, 0), new(2, 1), new(-1, -2)},
             {new(0, 0), new(-1, 0), new(2, 0), new(-1, 2), new(2, -1)},
-            {new(0, 0), new(1, 0), new(-2, 0), new(1, -2), new(-2, 1)},
             {new(0, 0), new(2, 0), new(-1, 0), new(2, 1), new(-1, -2)},
-            {new(0, 0), new(-2, 0), new(1, 0), new(-2, -1), new(1, 2)},
             {new(0, 0), new(1, 0), new(-2, 0), new(1, -2), new(-2, 1)},
-            {new(0, 0), new(-1, 0), new(2, 0), new(-1, 2), new(2, -1)},
         };
 
         private static readonly Vector2Int[,] WallKicksJLOSTZ =
         {
             {new(0, 0), new(-1, 0), new(-1, 1), new(0, -2), new(-1, -2)},
             {new(0, 0), new(1, 0), new(1, -1), new(0, 2), new(1, 2)},
-            {new(0, 0), new(1, 0), new(1, -1), new(0, 2), new(1, 2)},
-            {new(0, 0), new(-1, 0), new(-1, 1), new(0, -2), new(-1, -2)},
             {new(0, 0), new(1, 0), new(1, 1), new(0, -2), new(1, -2)},
             {new(0, 0), new(-1, 0), new(-1, -1), new(0, 2), new(-1, 2)},
-            {new(0, 0), new(-1, 0), new(-1, -1), new(0, 2), new(-1, 2)},
-            {new(0, 0), new(1, 0), new(1, 1), new(0, -2), new(1, -2)},
         };
+
+        public static Vector2Int[,] GetWallKicks(TetrominoType type)
+        {
+            if (type == TetrominoType.I)
+            {
+                return WallKicksI;
+            }
+
+            return WallKicksJLOSTZ;
+        }
     }
 }

@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: InbreatheLithiumGames
+  companyName: TakeYourLithium
   productName: Tetris
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -154,8 +154,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.LithiumGames.Tetris
-    Standalone: com.LithiumGames.Tetris
+    Android: com.TakeYourLithium.Tetris
+    Standalone: com.TakeYourLithium.Tetris
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -658,7 +658,7 @@ PlayerSettings:
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
-  selectedPlatform: 3
+  selectedPlatform: 2
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1

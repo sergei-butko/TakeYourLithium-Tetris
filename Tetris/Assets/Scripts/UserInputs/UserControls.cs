@@ -30,28 +30,19 @@ namespace UserInputs
             ""id"": ""7c352611-3e56-4a7d-8383-81c0a8b13109"",
             ""actions"": [
                 {
-                    ""name"": ""MoveRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""da51c835-10c3-4b39-8363-888340358dae"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MoveLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""d2ba4d30-e335-4d29-932f-4513052aec3c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Rotate"",
                     ""type"": ""Button"",
                     ""id"": ""e2b00d7c-4f97-41cb-a7db-3c2d07ef36c5"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""84437709-5935-45c5-b780-6bd58c4bdf76"",
+                    ""expectedControlType"": ""Delta"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -60,55 +51,22 @@ namespace UserInputs
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""2c73c1d9-e75b-48ce-a81c-0ef04edb3cd4"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""id"": ""36b556df-47be-4e57-9357-2f6b13d3783c"",
+                    ""path"": ""<Touchscreen>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""MoveRight"",
+                    ""groups"": """",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c68f0031-c1dd-4d02-9d48-1dbfef25daca"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
+                    ""id"": ""a0c684f1-1a7b-483c-b671-f5631b6c45f1"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""MoveRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""066f2e6f-dbd5-4b5d-813e-e538002d30c0"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""MoveLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a7f8c54f-ee4f-4efe-b28f-d896d995b79e"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""MoveLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""53a0d4ad-ea46-41e4-9655-5ee6d0323795"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -132,9 +90,8 @@ namespace UserInputs
 }");
             // Tetris
             m_Tetris = asset.FindActionMap("Tetris", throwIfNotFound: true);
-            m_Tetris_MoveRight = m_Tetris.FindAction("MoveRight", throwIfNotFound: true);
-            m_Tetris_MoveLeft = m_Tetris.FindAction("MoveLeft", throwIfNotFound: true);
             m_Tetris_Rotate = m_Tetris.FindAction("Rotate", throwIfNotFound: true);
+            m_Tetris_Move = m_Tetris.FindAction("Move", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -194,16 +151,14 @@ namespace UserInputs
         // Tetris
         private readonly InputActionMap m_Tetris;
         private ITetrisActions m_TetrisActionsCallbackInterface;
-        private readonly InputAction m_Tetris_MoveRight;
-        private readonly InputAction m_Tetris_MoveLeft;
         private readonly InputAction m_Tetris_Rotate;
+        private readonly InputAction m_Tetris_Move;
         public struct TetrisActions
         {
             private @UserControls m_Wrapper;
             public TetrisActions(@UserControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @MoveRight => m_Wrapper.m_Tetris_MoveRight;
-            public InputAction @MoveLeft => m_Wrapper.m_Tetris_MoveLeft;
             public InputAction @Rotate => m_Wrapper.m_Tetris_Rotate;
+            public InputAction @Move => m_Wrapper.m_Tetris_Move;
             public InputActionMap Get() { return m_Wrapper.m_Tetris; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -213,28 +168,22 @@ namespace UserInputs
             {
                 if (m_Wrapper.m_TetrisActionsCallbackInterface != null)
                 {
-                    @MoveRight.started -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMoveRight;
-                    @MoveRight.performed -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMoveRight;
-                    @MoveRight.canceled -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMoveRight;
-                    @MoveLeft.started -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMoveLeft;
-                    @MoveLeft.performed -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMoveLeft;
-                    @MoveLeft.canceled -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMoveLeft;
                     @Rotate.started -= m_Wrapper.m_TetrisActionsCallbackInterface.OnRotate;
                     @Rotate.performed -= m_Wrapper.m_TetrisActionsCallbackInterface.OnRotate;
                     @Rotate.canceled -= m_Wrapper.m_TetrisActionsCallbackInterface.OnRotate;
+                    @Move.started -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_TetrisActionsCallbackInterface.OnMove;
                 }
                 m_Wrapper.m_TetrisActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @MoveRight.started += instance.OnMoveRight;
-                    @MoveRight.performed += instance.OnMoveRight;
-                    @MoveRight.canceled += instance.OnMoveRight;
-                    @MoveLeft.started += instance.OnMoveLeft;
-                    @MoveLeft.performed += instance.OnMoveLeft;
-                    @MoveLeft.canceled += instance.OnMoveLeft;
                     @Rotate.started += instance.OnRotate;
                     @Rotate.performed += instance.OnRotate;
                     @Rotate.canceled += instance.OnRotate;
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
                 }
             }
         }
@@ -250,9 +199,8 @@ namespace UserInputs
         }
         public interface ITetrisActions
         {
-            void OnMoveRight(InputAction.CallbackContext context);
-            void OnMoveLeft(InputAction.CallbackContext context);
             void OnRotate(InputAction.CallbackContext context);
+            void OnMove(InputAction.CallbackContext context);
         }
     }
 }

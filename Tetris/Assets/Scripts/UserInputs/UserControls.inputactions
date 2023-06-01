@@ -6,28 +6,19 @@
             "id": "7c352611-3e56-4a7d-8383-81c0a8b13109",
             "actions": [
                 {
-                    "name": "MoveRight",
-                    "type": "Button",
-                    "id": "da51c835-10c3-4b39-8363-888340358dae",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveLeft",
-                    "type": "Button",
-                    "id": "d2ba4d30-e335-4d29-932f-4513052aec3c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Rotate",
                     "type": "Button",
                     "id": "e2b00d7c-4f97-41cb-a7db-3c2d07ef36c5",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "PassThrough",
+                    "id": "84437709-5935-45c5-b780-6bd58c4bdf76",
+                    "expectedControlType": "Delta",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,55 +27,22 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "2c73c1d9-e75b-48ce-a81c-0ef04edb3cd4",
-                    "path": "<Keyboard>/d",
+                    "id": "36b556df-47be-4e57-9357-2f6b13d3783c",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "MoveRight",
+                    "groups": "",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c68f0031-c1dd-4d02-9d48-1dbfef25daca",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
+                    "id": "a0c684f1-1a7b-483c-b671-f5631b6c45f1",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "Tap",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "MoveRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "066f2e6f-dbd5-4b5d-813e-e538002d30c0",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "MoveLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a7f8c54f-ee4f-4efe-b28f-d896d995b79e",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "MoveLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "53a0d4ad-ea46-41e4-9655-5ee6d0323795",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false

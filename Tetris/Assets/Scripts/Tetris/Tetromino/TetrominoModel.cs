@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Tetris.Base;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,7 +10,9 @@ namespace Tetris.Tetromino
     {
         public TetrominoType tetrominoType;
         public Tile tile;
-        public IEnumerable<Vector2Int> cells;
-        public Vector3Int position;
+        public Vector2Int[] cells;
+        public Vector2Int[,] wallKicks;
+        public Vector2Int position;
+        public int rotationIndex;
     }
 }

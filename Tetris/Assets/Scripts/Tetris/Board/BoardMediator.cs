@@ -19,10 +19,9 @@ namespace Tetris.Board
         public void SpawnTetromino(
             TetrominoType tetrominoType,
             Tile tile,
-            Vector3Int spawnPosition)
+            Vector2Int spawnPosition)
         {
-            var tetrominoInitializingSignal = new TetrominoInitializingSignal(
-                (BoardComponent) Component, tetrominoType, tile, spawnPosition);
+            var tetrominoInitializingSignal = new TetrominoInitializingSignal(tetrominoType, tile, spawnPosition);
             _signalBus.Fire(tetrominoInitializingSignal);
         }
     }

@@ -7,6 +7,6 @@ namespace Tetris.Board
     [Serializable]
     public class BoardModel : BaseModel
     {
-        public Vector3Int spawnPosition;
+        public Vector2Int spawnPosition;
     }
 }

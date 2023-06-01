@@ -8,11 +8,5 @@ namespace UserInputs.Signals
     /// </summary>
     public class RotateSignal
     {
-        // public Vector2 Direction;
-
-        public RotateSignal( /*Vector2 direction*/)
-        {
-            // Direction = direction;
-        }
     }
 }

@@ -10,15 +10,12 @@ namespace Tetris.Tetromino.Signals
     /// </summary>
     public class TetrominoInitializingSignal
     {
-        public BoardComponent BoardComponent;
         public TetrominoType TetrominoType;
         public Tile Tile;
-        public Vector3Int SpawnPosition;
+        public Vector2Int SpawnPosition;
 
-        public TetrominoInitializingSignal(
-            BoardComponent boardComponent, TetrominoType tetrominoType, Tile tile, Vector3Int spawnPosition)
+        public TetrominoInitializingSignal(TetrominoType tetrominoType, Tile tile, Vector2Int spawnPosition)
         {
-            BoardComponent = boardComponent;
             TetrominoType = tetrominoType;
             Tile = tile;
             SpawnPosition = spawnPosition;

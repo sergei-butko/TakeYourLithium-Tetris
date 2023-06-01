@@ -11,7 +11,7 @@ namespace Tetris.Board
         private TetrominoesConfig tetrominoesConfig;
 
         [SerializeField]
-        private Vector3Int spawnPosition = new(-1, 8, 0);
+        private Vector2Int spawnPosition = new(-1, 8);
 
         public override BoardModel GetModel()
         {
@@ -19,6 +19,11 @@ namespace Tetris.Board
             {
                 spawnPosition = spawnPosition
             };
+        }
+
+        private void Awake()
+        {
+            SpawnTetromino();
         }
 
         private void SpawnTetromino()
