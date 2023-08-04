@@ -32,7 +32,7 @@ namespace Tetris.Board
             var randomIndex = Random.Range(0, tetrominoes.Count);
             var tetrominoConfigModel = tetrominoes[randomIndex];
 
-            Mediator.SpawnTetromino(tetrominoConfigModel.tetrominoType, tetrominoConfigModel.tile, spawnPosition);
+            Mediator.SpawnTetromino(tetrominoConfigModel.tetrominoType, tetrominoConfigModel.tile);
         }
     }
 }

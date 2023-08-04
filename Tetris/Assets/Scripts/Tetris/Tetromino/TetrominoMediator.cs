@@ -96,7 +96,6 @@ namespace Tetris.Tetromino
                 switch (Model.tetrominoType)
                 {
                     case TetrominoType.I:
-                        break;
                     case TetrominoType.O:
                         cell.x -= 0.5f;
                         cell.y -= 0.5f;

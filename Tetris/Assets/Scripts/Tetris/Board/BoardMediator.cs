@@ -1,7 +1,6 @@
 using Tetris.Base;
 using Tetris.Tetromino;
 using Tetris.Tetromino.Signals;
-using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
 
@@ -16,12 +15,9 @@ namespace Tetris.Board
         {
         }
 
-        public void SpawnTetromino(
-            TetrominoType tetrominoType,
-            Tile tile,
-            Vector2Int spawnPosition)
+        public void SpawnTetromino(TetrominoType tetrominoType, Tile tile)
         {
-            var tetrominoInitializingSignal = new TetrominoInitializingSignal(tetrominoType, tile, spawnPosition);
+            var tetrominoInitializingSignal = new TetrominoInitializingSignal(tetrominoType, tile, Model.spawnPosition);
             _signalBus.Fire(tetrominoInitializingSignal);
         }
     }

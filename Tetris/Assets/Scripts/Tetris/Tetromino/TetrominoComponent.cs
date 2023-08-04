@@ -1,5 +1,6 @@
 using Attributes;
 using Tetris.Base;
+using Tetris.Board;
 using Tetris.Utils;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,12 +17,26 @@ namespace Tetris.Tetromino
         [SerializeField, InspectorReadOnly]
         private Tile tile;
 
+        private BoardComponent _boardComponent;
+        private Tilemap _tilemap;
+
         private Vector2Int[] _cells;
         private Vector2Int[,] _wallKicks;
         private Vector2Int _position;
         private int _rotationIndex;
 
-        public Tilemap Tilemap { get; private set; }
+        public Tilemap Tilemap
+        {
+            get
+            {
+                if (_tilemap == null)
+                {
+                    _tilemap = GetComponentInChildren<Tilemap>();
+                }
+
+                return _tilemap;
+            }
+        }
 
         public RectInt Bounds
         {
@@ -76,11 +91,6 @@ namespace Tetris.Tetromino
                 var tilePosition = cell + _position;
                 Tilemap.SetTile((Vector3Int) tilePosition, null);
             }
-        }
-
-        private void Awake()
-        {
-            Tilemap = GetComponentInChildren<Tilemap>();
         }
     }
 }
