@@ -7,7 +7,7 @@ namespace ScriptableObjects.Tetrominoes
     [Serializable]
     public class TetrominoConfigModel
     {
-        public TetrominoType tetrominoType;
+        public TetrominoType type;
         public Tile tile;
     }
 }
