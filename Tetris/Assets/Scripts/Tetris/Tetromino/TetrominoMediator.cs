@@ -14,6 +14,17 @@ namespace Tetris.Tetromino
         [Inject]
         private SignalBus _signalBus;
 
+        public bool Move(Vector2Int newPosition)
+        {
+            if (!IsValidPosition(newPosition)) return false;
+
+            Model.position = newPosition;
+            Model.lockTime = 0f;
+
+            Component.OnUpdate(Model);
+            return true;
+        }
+
         protected override void OnInitialized()
         {
             _signalBus
@@ -32,12 +43,15 @@ namespace Tetris.Tetromino
 
         private void OnTetrominoInitializing(TetrominoInitializingSignal signal)
         {
-            Model.tetrominoType = signal.TetrominoType;
+            Model.tetrominoType = signal.Type;
             Model.tile = signal.Tile;
-            Model.cells = TetrominoesData.Cells[signal.TetrominoType];
-            Model.wallKicks = TetrominoesData.GetWallKicks(signal.TetrominoType);
+            Model.cells = TetrominoesData.Cells[signal.Type];
+            Model.wallKicks = TetrominoesData.GetWallKicks(signal.Type);
             Model.position = signal.SpawnPosition;
             Model.rotationIndex = 0;
+            Model.stepDelay = signal.StepDelay;
+            Model.lockDelay = signal.LockDelay;
+            Model.lockTime = 0f;
 
             Component.OnUpdate(Model);
         }
@@ -75,23 +89,13 @@ namespace Tetris.Tetromino
             tetrominoComponent.Set();
         }
 
-        private bool Move(Vector2Int newPosition)
-        {
-            if (!IsValidPosition(newPosition)) return false;
-
-            Model.position = newPosition;
-            Component.OnUpdate(Model);
-            return true;
-        }
-
         private void ApplyRotationMatrix(int direction)
         {
             for (var i = 0; i < Model.cells.Length; i++)
             {
                 var cell = (Vector2) Model.cells[i];
 
-                var x = 0;
-                var y = 0;
+                int x, y;
 
                 switch (Model.tetrominoType)
                 {
@@ -106,6 +110,12 @@ namespace Tetris.Tetromino
                             cell.x * TetrominoesData.RotationMatrix[2] * direction +
                             cell.y * TetrominoesData.RotationMatrix[3] * direction);
                         break;
+                    case TetrominoType.T:
+                    case TetrominoType.J:
+                    case TetrominoType.L:
+                    case TetrominoType.S:
+                    case TetrominoType.Z:
+                    case TetrominoType.Ghost:
                     default:
                         x = Mathf.RoundToInt(
                             cell.x * TetrominoesData.RotationMatrix[0] * direction +

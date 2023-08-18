@@ -1,3 +1,4 @@
+using System;
 using Attributes;
 using Tetris.Base;
 using Tetris.Board;
@@ -24,6 +25,12 @@ namespace Tetris.Tetromino
         private Vector2Int[,] _wallKicks;
         private Vector2Int _position;
         private int _rotationIndex;
+
+        private float _stepDelay;
+        private float _lockDelay;
+
+        private float _stepTime;
+        private float _lockTime;
 
         public Tilemap Tilemap
         {
@@ -59,6 +66,9 @@ namespace Tetris.Tetromino
                 cells = _cells,
                 position = _position,
                 rotationIndex = _rotationIndex,
+                stepDelay = _stepDelay,
+                lockDelay = _lockDelay,
+                lockTime = _lockTime,
             };
         }
 
@@ -71,6 +81,9 @@ namespace Tetris.Tetromino
             _cells = model.cells;
             _position = model.position;
             _rotationIndex = model.rotationIndex;
+            _stepDelay = model.stepDelay;
+            _lockDelay = model.lockDelay;
+            _lockTime = model.lockTime;
 
             Set();
         }
@@ -91,6 +104,50 @@ namespace Tetris.Tetromino
                 var tilePosition = cell + _position;
                 Tilemap.SetTile((Vector3Int) tilePosition, null);
             }
+        }
+
+        private void Awake()
+        {
+            if (!TryGetComponent(out _boardComponent))
+            {
+                throw new NullReferenceException(
+                    $"No component of type {typeof(BoardComponent)} was set up for object {name}");
+            }
+
+            _stepTime = Time.time + _stepDelay;
+            _lockTime = 0f;
+        }
+
+        private void Update()
+        {
+            Clear();
+
+            _lockTime += Time.deltaTime;
+
+            if (Time.time >= _stepTime && Time.time != 0)
+            {
+                Step();
+            }
+
+            Set();
+        }
+
+        private void Step()
+        {
+            _stepTime = Time.time + _stepDelay;
+
+            Mediator.Move(_position + Vector2Int.down);
+
+            if (_lockTime >= _lockDelay)
+            {
+                Lock();
+            }
+        }
+
+        private void Lock()
+        {
+            Set();
+            _boardComponent.SpawnTetromino();
         }
     }
 }

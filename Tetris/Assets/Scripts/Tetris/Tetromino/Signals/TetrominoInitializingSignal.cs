@@ -1,3 +1,4 @@
+using ScriptableObjects.Tetrominoes;
 using Tetris.Board;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,15 +11,20 @@ namespace Tetris.Tetromino.Signals
     /// </summary>
     public class TetrominoInitializingSignal
     {
-        public TetrominoType TetrominoType;
+        public TetrominoType Type;
         public Tile Tile;
         public Vector2Int SpawnPosition;
+        public float StepDelay;
+        public float LockDelay;
 
-        public TetrominoInitializingSignal(TetrominoType tetrominoType, Tile tile, Vector2Int spawnPosition)
+        public TetrominoInitializingSignal(TetrisConfig tetrisConfig, int tetrominoIndex)
         {
-            TetrominoType = tetrominoType;
-            Tile = tile;
-            SpawnPosition = spawnPosition;
+            var tetromino = tetrisConfig.tetrominoes[tetrominoIndex];
+            Type = tetromino.type;
+            Tile = tetromino.tile;
+            SpawnPosition = tetrisConfig.spawnPosition;
+            StepDelay = tetrisConfig.stepDelay;
+            LockDelay = tetrisConfig.lockDelay;
         }
     }
 }

@@ -14,5 +14,8 @@ namespace Tetris.Tetromino
         public Vector2Int[,] wallKicks;
         public Vector2Int position;
         public int rotationIndex;
+        public float stepDelay;
+        public float lockDelay;
+        public float lockTime;
     }
 }
