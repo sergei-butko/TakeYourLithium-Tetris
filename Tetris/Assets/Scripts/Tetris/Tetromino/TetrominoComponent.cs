@@ -1,4 +1,3 @@
-using System;
 using Attributes;
 using Tetris.Base;
 using Tetris.Board;
@@ -10,8 +9,6 @@ namespace Tetris.Tetromino
 {
     public class TetrominoComponent : BaseComponent<TetrominoModel, TetrominoMediator>
     {
-        private readonly Vector2Int _boardSize = new(10, 20);
-
         [SerializeField, InspectorReadOnly]
         private TetrominoType tetrominoType = TetrominoType.Ghost;
 
@@ -32,6 +29,19 @@ namespace Tetris.Tetromino
         private float _stepTime;
         private float _lockTime;
 
+        public BoardComponent Board
+        {
+            get
+            {
+                if (_boardComponent == null)
+                {
+                    _boardComponent = GetComponent<BoardComponent>();
+                }
+
+                return _boardComponent;
+            }
+        }
+
         public Tilemap Tilemap
         {
             get
@@ -42,15 +52,6 @@ namespace Tetris.Tetromino
                 }
 
                 return _tilemap;
-            }
-        }
-
-        public RectInt Bounds
-        {
-            get
-            {
-                var position = new Vector2Int(-_boardSize.x / 2, -_boardSize.y / 2);
-                return new RectInt(position, _boardSize);
             }
         }
 
@@ -108,12 +109,6 @@ namespace Tetris.Tetromino
 
         private void Awake()
         {
-            if (!TryGetComponent(out _boardComponent))
-            {
-                throw new NullReferenceException(
-                    $"No component of type {typeof(BoardComponent)} was set up for object {name}");
-            }
-
             _stepTime = Time.time + _stepDelay;
             _lockTime = 0f;
         }
@@ -147,7 +142,8 @@ namespace Tetris.Tetromino
         private void Lock()
         {
             Set();
-            _boardComponent.SpawnTetromino();
+            Board.ClearLine(Tilemap);
+            Board.SpawnTetromino();
         }
     }
 }

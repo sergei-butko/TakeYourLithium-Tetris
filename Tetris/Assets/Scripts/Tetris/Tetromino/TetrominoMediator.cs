@@ -138,7 +138,7 @@ namespace Tetris.Tetromino
             {
                 var tilePosition = cell + position;
 
-                if (!tetrominoComponent.Bounds.Contains(tilePosition) ||
+                if (!tetrominoComponent.Board.Bounds.Contains(tilePosition) ||
                     tetrominoComponent.Tilemap.HasTile((Vector3Int) tilePosition))
                 {
                     return false;
